@@ -504,10 +504,10 @@ void deploytest::testExtractLib() {
 }
 
 void deploytest::testMSVC() {
-    QString testPath = "./Qt/5.11.2/msvc2017_64/bin/";
+    QString testPath = "./QT/5.11.2/MSVC2017_64/BIN/";
 
     QDir d;
-    QDir oldDir("./Qt");
+    QDir oldDir("./QT");
     oldDir.removeRecursively();
     QVERIFY(d.mkpath(testPath));
 
@@ -517,7 +517,7 @@ void deploytest::testMSVC() {
     QVERIFY(msvc & MSVCVersion::MSVC_17);
     QVERIFY(msvc & MSVCVersion::MSVC_x64);
 
-    QDir dir("./Qt");
+    QDir dir("./QT");
     dir.removeRecursively();
 
 
