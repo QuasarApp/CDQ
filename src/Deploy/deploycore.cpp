@@ -398,7 +398,7 @@ QStringList DeployCore::extractTranslation(const QSet<QString> &libs) {
 }
 
 QString DeployCore::getAppVersion() {
-    return APP_VERSION;
+    return QLibraryInfo::version().toString();
 }
 
 QString DeployCore::getAppVersionName() {
