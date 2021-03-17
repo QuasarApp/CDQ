@@ -25,6 +25,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 
 file(GLOB SOURCE_CPP
     "*.cpp"
+    "*.qrc"
     "Distributions/*.cpp"
     "../../qtTools/src/shared/winutils/elfreader.cpp"
 

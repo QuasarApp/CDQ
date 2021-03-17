@@ -24,12 +24,15 @@ file(GLOB SOURCE_CPP
 )
 
 include(../../QuasarAppLib/CMake/ProjectOut.cmake)
+include(../../QuasarAppLib/CMake/QuasarAppCITargets.cmake)
 
 
 add_definitions(-DQTEST_FUNCTION_TIMEOUT=900000)
-add_definitions(-DQT_BASE_DIR="${Qt5_DIR}")
-add_definitions(-DTEST_BIN_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+add_definitions(-DQT_BASE_DIR="${Qt5_DIR}/../../..")
+add_definitions(-DTEST_BIN_DIR="${CMAKE_SOURCE_DIR}/tests/build")
 
 add_executable(${CURRENT_PROJECT} ${SOURCE_CPP})
 target_link_libraries(${CURRENT_PROJECT} PRIVATE Deploy Qt::Test)
 target_include_directories(${CURRENT_PROJECT} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+addTests(${PROJECT_NAME} ${CURRENT_PROJECT})

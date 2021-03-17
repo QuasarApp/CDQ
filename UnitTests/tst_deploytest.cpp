@@ -34,8 +34,8 @@
 // add necessary includes here
 
 
-static const QString TestBinDir = TEST_BIN_DIR;
-static const QString TestQtDir = QT_BASE_DIR;
+static const QString TestBinDir = QString(TEST_BIN_DIR) + "/";
+static const QString TestQtDir = QString(QT_BASE_DIR) + "/";
 
 class deploytest : public QObject
 {

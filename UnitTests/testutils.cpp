@@ -70,11 +70,11 @@ QHash<QString, int> TestUtils::compareTree(const QSet<QString> &leftTree, const 
     auto valuel = leftTree - rightTree;
     auto valuer = rightTree - leftTree;
 
-    for(auto &i :valuel) {
+    for(auto &i :qAsConst(valuel)) {
         result.insert(i, 1);
     }
 
-    for(auto &i :valuer) {
+    for(auto &i :qAsConst(valuer)) {
         result.insert(i, -1);
     }
 

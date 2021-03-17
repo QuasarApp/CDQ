@@ -13,9 +13,6 @@ set(BUILD_SHARED_LIBS ON)
 include(QuasarAppLib/CMake/ccache.cmake)
 include(QuasarAppLib/CMake/QuasarAppCITargets.cmake)
 
-initAll()
-addDoc(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/doxygen.conf)
-
 # Add sub directories
 add_subdirectory(QuasarAppLib)
 add_subdirectory(pe)
@@ -23,4 +20,11 @@ add_subdirectory(zip)
 
 add_subdirectory(src)
 add_subdirectory(UnitTests)
+add_subdirectory(tests)
+
+initAll()
+addDoc(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/doxygen.conf)
+
+addDeployFromCustomFile("Client" "${CMAKE_CURRENT_SOURCE_DIR}/Deploy/Client.json")
+
 
