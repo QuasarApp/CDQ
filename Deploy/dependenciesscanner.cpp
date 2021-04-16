@@ -13,9 +13,14 @@
 #include <QDir>
 #include <QDebug>
 #include "pathutils.h"
+#include "pe_type.h"
+#include "elf_type.h"
+#include "generalfiles_type.h"
 
 DependenciesScanner::DependenciesScanner() {
-
+    _peScaner = new PE();
+    _elfScaner = new ELF();
+    _filesScaner = new GeneralFiles();
 }
 
 void DependenciesScanner::clearScaned() {
@@ -88,15 +93,15 @@ bool DependenciesScanner::fillLibInfo(LibInfo &info, const QString &file) const 
 
     switch (scaner) {
     case PrivateScaner::PE: {
-        return _peScaner.getLibInfo(file, info);
+        return _peScaner->getLibInfo(file, info);
     }
 
     case PrivateScaner::ELF: {
-        return _elfScaner.getLibInfo(file, info);
+        return _elfScaner->getLibInfo(file, info);
     }
 
     default:
-        return _filesScaner.getLibInfo(file, info);
+        return _filesScaner->getLibInfo(file, info);
     }
 }
 
@@ -172,7 +177,7 @@ void DependenciesScanner::recursiveDep(LibInfo &lib, QSet<LibInfo> &res, QSet<QS
 void DependenciesScanner::addToWinAPI(const QString &lib, QHash<WinAPI, QSet<QString>>& res) {
 #ifdef Q_OS_WIN
     if (QuasarAppUtils::Params::isEndable("deploySystem")) {
-        WinAPI api = _peScaner.getAPIModule(lib);
+        WinAPI api = _peScaner->getAPIModule(lib);
         if (api != WinAPI::NoWinAPI) {
             res[api] += lib;
         }
@@ -210,7 +215,7 @@ void DependenciesScanner::setEnvironment(const QStringList &env) {
     }
 
 
-    _peScaner.setWinAPI(winAPI);
+    _peScaner->setWinAPI(winAPI);
 }
 
 QSet<LibInfo> DependenciesScanner::scan(const QString &path) {
@@ -229,5 +234,7 @@ QSet<LibInfo> DependenciesScanner::scan(const QString &path) {
 }
 
 DependenciesScanner::~DependenciesScanner() {
-
+    delete _elfScaner;
+    delete _peScaner;
+    delete _filesScaner;
 }

@@ -16,7 +16,6 @@ android: DEFINES += WITHOUT_TESTS
 
 !android {
     SUBDIRS += QuasarAppLib \
-               Pe \
                zip \
                Deploy \
                CQtDeployer \
@@ -43,7 +42,6 @@ android: DEFINES += WITHOUT_TESTS
     CQtDeployer.depends=Deploy
 
     QuasarAppLib.file = $$PWD/QuasarAppLib/QuasarApp.pro
-    Pe.file = $$PWD/pe/pe-parser-library/pe-parser-library.pro
 
     include('$$PWD/QIFData/installerCQtDeployer.pri')
 
@@ -54,5 +52,7 @@ android: DEFINES += WITHOUT_TESTS
 
 
 }
-    include($$PWD/test.pri)
+include(LIEF/LIEF.pri)
+include($$PWD/test.pri)
+
 
